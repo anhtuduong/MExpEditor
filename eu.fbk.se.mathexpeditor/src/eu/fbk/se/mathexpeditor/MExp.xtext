@@ -1,0 +1,64 @@
+grammar eu.fbk.se.mathexpeditor.MExp with org.eclipse.xtext.common.Terminals
+
+generate mExp "http://www.fbk.eu/se/mathexpeditor/MExp"
+
+
+Model:
+	constDefinitions+=ConstDefinition* 
+	varDefinitions+=VarDefinition*
+	expDefinitions+=ExpDefinition*
+	;
+	
+
+ConstDefinition:
+	'Const'  varName=ID COLON varValue=INT SEMICOLON
+;
+
+
+VarDefinition:
+	'Var'  varName=ID COLON  varValue=INT SEMICOLON
+;
+
+
+ExpDefinition:
+	'Exp'  varName=ID COLON varValue=MathExpression  SEMICOLON
+;
+
+
+MathExpression:
+	{MathExpression}
+	const=INT |
+	var=ID |
+	(var=ID | const=INT ) OPERATOR exp1=MathExpression |
+	L_BRACKET exp2=MathExpression R_BRACKET
+;
+
+
+terminal OPERATOR :
+	"+" | "-" 
+;
+
+terminal EQUAL :
+	"="
+;
+
+
+terminal ASSIGN :
+	":="
+;
+
+terminal SEMICOLON :
+	";"
+;
+
+terminal COLON :
+	":"
+;
+
+terminal L_BRACKET : 
+	'('
+;
+
+terminal R_BRACKET : 
+	')'
+;

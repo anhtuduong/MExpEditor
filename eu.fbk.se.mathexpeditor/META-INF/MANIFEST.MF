@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: eu.fbk.se.mathexpeditor
+Bundle-ManifestVersion: 2
+Bundle-Name: eu.fbk.se.mathexpeditor
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: eu.fbk.se.mathexpeditor; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: eu.fbk.se.mathexpeditor.parser.antlr,
+ eu.fbk.se.mathexpeditor.mExp.util,
+ eu.fbk.se.mathexpeditor.mExp,
+ eu.fbk.se.mathexpeditor.serializer,
+ eu.fbk.se.mathexpeditor.parser.antlr.internal,
+ eu.fbk.se.mathexpeditor.generator,
+ eu.fbk.se.mathexpeditor,
+ eu.fbk.se.mathexpeditor.validation,
+ eu.fbk.se.mathexpeditor.mExp.impl,
+ eu.fbk.se.mathexpeditor.scoping,
+ eu.fbk.se.mathexpeditor.services
+Import-Package: org.apache.log4j
