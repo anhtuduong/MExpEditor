@@ -35,7 +35,7 @@ MathExpression:
 
 
 terminal OPERATOR :
-	"+" | "-" 
+	"+" | "-" | "*"
 ;
 
 terminal EQUAL :

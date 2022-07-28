@@ -11,28 +11,27 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import eu.fbk.se.mathexpeditor.mExp.MExpPackage
+import eu.fbk.se.mathexpeditor.validation.MExpValidator
 
 @ExtendWith(InjectionExtension)
 @InjectWith(MExpInjectorProvider)
-class MExpParsingTest {
+
+class MExpValidationTest {
 	@Inject
 	ParseHelper<Model> parseHelper
+	ValidationTestHelper validationTestHelper
 	
 	@Test
-	def void loadModel() {
+	def void testDuplicatedNames() {
 		val result = parseHelper.parse('''
 			Const x : 10;
-			Const y : 10;
-			Const x1 : 10;
-			Const x2 : 10;
-			Const x3 : 10;
-			Var x21 : 10;
-			Exp x : a + y * (10);
+			Const x : 10;
 		''')
 		Assertions.assertNotNull(result)
-		val errors = result.eResource.errors
-		System.out.println("errors: " + errors)
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+//		System.out.println("errors: " + validationTestHelper.assertError(result, result.constDefinitions, ))
+		validationTestHelper.assertError(result, MExpPackage.Literals.CONST_DEFINITION, "Names must be unique", MExpValidator.DUPLICATED_VAR_NAME)
+		
 	}
 }
-

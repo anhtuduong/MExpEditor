@@ -112,10 +112,10 @@ public class InternalMExpLexer extends Lexer {
         try {
             int _type = RULE_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMExp.g:1158:15: ( ( '+' | '-' ) )
-            // InternalMExp.g:1158:17: ( '+' | '-' )
+            // InternalMExp.g:1158:15: ( ( '+' | '-' | '*' ) )
+            // InternalMExp.g:1158:17: ( '+' | '-' | '*' )
             {
-            if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
+            if ( (input.LA(1)>='*' && input.LA(1)<='+')||input.LA(1)=='-' ) {
                 input.consume();
 
             }
@@ -898,7 +898,7 @@ public class InternalMExpLexer extends Lexer {
     static final String DFA12_specialS =
         "\1\0\14\uffff\1\2\1\1\33\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\4\21\1\16\1\10\1\11\1\21\1\4\1\21\1\4\1\21\1\17\12\14\1\6\1\7\1\21\1\5\3\21\2\13\1\1\1\13\1\3\20\13\1\2\4\13\3\21\1\12\1\13\1\21\32\13\uff85\21",
+            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\4\21\1\16\1\10\1\11\2\4\1\21\1\4\1\21\1\17\12\14\1\6\1\7\1\21\1\5\3\21\2\13\1\1\1\13\1\3\20\13\1\2\4\13\3\21\1\12\1\13\1\21\32\13\uff85\21",
             "\1\22",
             "\1\24",
             "\1\25",
@@ -988,7 +988,7 @@ public class InternalMExpLexer extends Lexer {
 
                         else if ( (LA12_0=='E') ) {s = 3;}
 
-                        else if ( (LA12_0=='+'||LA12_0=='-') ) {s = 4;}
+                        else if ( ((LA12_0>='*' && LA12_0<='+')||LA12_0=='-') ) {s = 4;}
 
                         else if ( (LA12_0=='=') ) {s = 5;}
 
@@ -1014,7 +1014,7 @@ public class InternalMExpLexer extends Lexer {
 
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 16;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||LA12_0=='*'||LA12_0==','||LA12_0=='.'||LA12_0=='<'||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 17;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||LA12_0==','||LA12_0=='.'||LA12_0=='<'||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 17;}
 
                         if ( s>=0 ) return s;
                         break;

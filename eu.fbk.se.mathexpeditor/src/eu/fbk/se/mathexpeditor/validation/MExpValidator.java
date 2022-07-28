@@ -26,8 +26,8 @@ import eu.fbk.se.mathexpeditor.mExp.VarDefinition;
  */
 public class MExpValidator extends AbstractMExpValidator {
 	
-	private static final String DUPLICATED_VAR_NAME = "Names must be unique";
-	private static final String UNDEFINED_NAME = "Names must be first defined";
+	public static final String DUPLICATED_VAR_NAME = "Names must be unique";
+	public static final String UNDEFINED_NAME = "Names must be first defined";
 
 
 	@Check
@@ -51,6 +51,17 @@ public class MExpValidator extends AbstractMExpValidator {
 				boolean newVar = definedNames.add(varName);
 				if (!newVar) {
 					error(DUPLICATED_VAR_NAME, varDef, MExpPackage.Literals.VAR_DEFINITION__VAR_NAME);
+				}
+			}
+		}
+		
+		EList<ExpDefinition> expDefinitions = root.getExpDefinitions();
+		for (ExpDefinition expDef : expDefinitions) {
+			String varName = expDef.getVarName();
+			if (varName != null && !varName.isBlank()) {
+				boolean newVar = definedNames.add(varName);
+				if (!newVar) {
+					error(DUPLICATED_VAR_NAME, expDef, MExpPackage.Literals.EXP_DEFINITION__VAR_NAME);
 				}
 			}
 		}
