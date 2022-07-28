@@ -30,13 +30,43 @@ public class MExpValidationTest {
   public void testDuplicatedNames() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Const x : 10;");
+      _builder.append("Const y : 10;");
       _builder.newLine();
-      _builder.append("Const x : 10;");
+      _builder.append("Const y : 10;");
       _builder.newLine();
       final Model result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
       this.validationTestHelper.assertError(result, MExpPackage.Literals.CONST_DEFINITION, "Names must be unique", MExpValidator.DUPLICATED_VAR_NAME);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testUndefinedNames() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Const a : 10;");
+      _builder.newLine();
+      _builder.append("Exp b : a x 10;");
+      _builder.newLine();
+      final Model result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validationTestHelper.assertError(result, MExpPackage.Literals.EXP_DEFINITION, "Names must be first defined", MExpValidator.UNDEFINED_NAME);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInvalidNames() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Const x : 10;");
+      _builder.newLine();
+      final Model result = this.parseHelper.parse(_builder);
+      Assertions.assertNotNull(result);
+      this.validationTestHelper.assertError(result, MExpPackage.Literals.CONST_DEFINITION, "Names must not be x", MExpValidator.INVALID_NAME);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

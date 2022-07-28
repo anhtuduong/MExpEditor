@@ -498,7 +498,7 @@ ruleMathExpression returns [EObject current=null]
 	)
 ;
 
-RULE_OPERATOR : ('+'|'-'|'*');
+RULE_OPERATOR : ('+'|'-'|'x');
 
 RULE_EQUAL : '=';
 

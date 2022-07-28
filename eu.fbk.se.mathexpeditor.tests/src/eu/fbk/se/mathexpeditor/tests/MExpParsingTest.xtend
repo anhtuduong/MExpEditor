@@ -21,13 +21,12 @@ class MExpParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Const x : 10;
 			Const y : 10;
 			Const x1 : 10;
 			Const x2 : 10;
 			Const x3 : 10;
 			Var x21 : 10;
-			Exp x : a + y * (10);
+			Exp x4 : a + y x (10);
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors

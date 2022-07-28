@@ -26,12 +26,29 @@ class MExpValidationTest {
 	@Test
 	def void testDuplicatedNames() {
 		val result = parseHelper.parse('''
-			Const x : 10;
+			Const y : 10;
+			Const y : 10;
+		''')
+		Assertions.assertNotNull(result)
+		validationTestHelper.assertError(result, MExpPackage.Literals.CONST_DEFINITION, "Names must be unique", MExpValidator.DUPLICATED_VAR_NAME)
+	}
+	
+	@Test
+	def void testUndefinedNames() {
+		val result = parseHelper.parse('''
+			Const a : 10;
+			Exp b : a x 10;
+		''')
+		Assertions.assertNotNull(result)
+		validationTestHelper.assertError(result, MExpPackage.Literals.EXP_DEFINITION, "Names must be first defined", MExpValidator.UNDEFINED_NAME)
+	}
+	
+	@Test
+	def void testInvalidNames() {
+		val result = parseHelper.parse('''
 			Const x : 10;
 		''')
 		Assertions.assertNotNull(result)
-//		System.out.println("errors: " + validationTestHelper.assertError(result, result.constDefinitions, ))
-		validationTestHelper.assertError(result, MExpPackage.Literals.CONST_DEFINITION, "Names must be unique", MExpValidator.DUPLICATED_VAR_NAME)
-		
+		validationTestHelper.assertError(result, MExpPackage.Literals.CONST_DEFINITION, "Names must not be x", MExpValidator.INVALID_NAME)
 	}
 }

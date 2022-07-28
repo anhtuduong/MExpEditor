@@ -411,7 +411,7 @@ public class MExpGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//terminal OPERATOR :
-	//    "+" | "-" | "*"
+	//    "+" | "-" | "x"
 	//;
 	public TerminalRule getOPERATORRule() {
 		return tOPERATOR;

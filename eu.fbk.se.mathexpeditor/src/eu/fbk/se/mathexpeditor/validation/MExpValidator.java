@@ -28,7 +28,35 @@ public class MExpValidator extends AbstractMExpValidator {
 	
 	public static final String DUPLICATED_VAR_NAME = "Names must be unique";
 	public static final String UNDEFINED_NAME = "Names must be first defined";
+	public static final String INVALID_NAME = "Names must not be x";
 
+	@Check
+	public void checkValidName(Model root) {
+		
+		EList<ConstDefinition> constDefinitions = root.getConstDefinitions();
+		for (ConstDefinition constDef : constDefinitions) {
+			String varName = constDef.getVarName();
+			if (varName == "x") {
+				error(INVALID_NAME, constDef, MExpPackage.Literals.CONST_DEFINITION__VAR_NAME);
+			}
+		}
+		
+		EList<VarDefinition> varDefinitions = root.getVarDefinitions();
+		for (VarDefinition varDef : varDefinitions) {
+			String varName = varDef.getVarName();
+			if (varName == "x") {
+				error(INVALID_NAME, varDef, MExpPackage.Literals.VAR_DEFINITION__VAR_NAME);
+			}
+		}
+		
+		EList<ExpDefinition> expDefinitions = root.getExpDefinitions();
+		for (ExpDefinition expDef : expDefinitions) {
+			String varName = expDef.getVarName();
+			if (varName == "x") {
+				error(INVALID_NAME, expDef, MExpPackage.Literals.EXP_DEFINITION__VAR_NAME);
+			}
+		}
+	}
 
 	@Check
 	public void checkNamesAreUnique(Model root) {

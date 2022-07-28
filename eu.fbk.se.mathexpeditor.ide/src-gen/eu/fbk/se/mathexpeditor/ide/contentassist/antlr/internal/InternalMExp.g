@@ -1155,7 +1155,7 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-RULE_OPERATOR : ('+'|'-'|'*');
+RULE_OPERATOR : ('+'|'-'|'x');
 
 RULE_EQUAL : '=';
 

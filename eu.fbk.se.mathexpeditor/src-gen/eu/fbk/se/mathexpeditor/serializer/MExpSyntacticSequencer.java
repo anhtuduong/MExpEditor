@@ -63,7 +63,7 @@ public class MExpSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * terminal OPERATOR :
-	 * 	"+" | "-" | "*"
+	 * 	"+" | "-" | "x"
 	 * ;
 	 */
 	protected String getOPERATORToken(EObject semanticObject, RuleCall ruleCall, INode node) {
